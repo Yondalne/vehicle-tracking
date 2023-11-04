@@ -26,7 +26,6 @@ class AuthController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'user' => auth()->guard('driver')->user(),
-                'user_vehicles' => auth()->guard('driver')->user()->vehicles,
             ], 200);
         }
 
