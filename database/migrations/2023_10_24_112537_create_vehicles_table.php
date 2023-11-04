@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('power');
             $table->string('color');
             $table->string('brand');
+            $table->foreignId('driver_id')->constrained();
             $table->date('production_year');
             $table->timestamps();
         });
