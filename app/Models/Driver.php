@@ -29,7 +29,7 @@ class Driver extends Authenticatable
         'remember_token',
     ];
 
-    public function vehicle () {
+    public function vehicles () {
         return $this->hasMany(Vehicle::class);
     }
 

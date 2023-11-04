@@ -23,7 +23,11 @@ class AuthController extends Controller
 
         if (Auth::guard('driver')->attempt($credentials)) {
             $token = auth()->guard('driver')->user()->createToken('MyApp')->plainTextToken;
-            return response()->json(['access_token' => $token], 200);
+            return response()->json([
+                'access_token' => $token,
+                'user' => auth()->guard('driver')->user(),
+                'user_vehicles' => auth()->guard('driver')->user()->vehicles,
+            ], 200);
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
