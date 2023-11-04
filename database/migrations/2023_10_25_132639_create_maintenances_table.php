@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('maintenances', function (Blueprint $table) {
+
             $table->string("numfact")->unique();
             $table->string("repsais");
             $table->double("montantM");
-            $table->foreignId("chauffeur_id")->constrained();
+            $table->foreignId("driver_id")->constrained();
             $table->timestamps();
         });
     }

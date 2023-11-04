@@ -10,9 +10,14 @@ class ChauffeurController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-       $chauffeur = Chauffeur::all();
+       $chauffeur = Chauffeur::get();
+       return response()->json([
+        "status" => 1,
+        "message" => "Liste vehicules",
+        "data" =>$chauffeur
+       ], 200);
       
     }
 
@@ -48,87 +53,59 @@ class ChauffeurController extends Controller
         $chauffeur->save();
     }
     
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        // Get the data from the request
-        $nom = $request->input('nom');
-        $prenom = $request->input('prenom');
-        $numpieceid = $request->input('numpieceid');
-        $salaire = $request->input('salaire');
-        $adresse = $request->input('adresse');
-        $mot_de_passe = $request->input('mot_de_passe');
-        $date_de_naissance = $request->input('date_de_naissance');
-        $telephone = $request->input('telephone');
-
-        // Create a new Post instance and put the requested data to the corresponding column
-        $chauffeur = new Chauffeur;
-        $chauffeur->nom = $nom;
-        $chauffeur->prenom = $prenom;
-        $chauffeur->numpieceid = $numpieceid;
-        $chauffeur->salaire = $salaire;
-        $chauffeur->adresse = $adresse;
-        $chauffeur->mot_de_passe = $mot_de_passe;
-        $chauffeur->date_de_naissance = $date_de_naissance;
-        $chauffeur->telephone = $telephone;
-        
-      
-
-        // Save the data
-        $chauffeur->save();
-
-        return redirect()->route('chauffeur.index');
-    }
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
-    }
+        $chauffeur = Chauffeur::where("id", $id)->exists();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+       if ($chauffeur) {
+            $info = chauffeur::find($id);
+        return response()->json([
+            "status" => 1,
+            "message" => "chauffeur trouvé",
+            "data" =>$info
+           ], 200);
+       }else {
+        return response()->json([
+            "status" => 0,
+            "message" => "chauffeur introuvable"
+           ], 404);
+       }
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, string $id)
     {
-        // Get the data from the request
-        $nom = $request->input('nom');
-        $prenom = $request->input('prenom');
-        $numpieceid = $request->input('numpieceid');
-        $salaire = $request->input('salaire');
-        $adresse = $request->input('adresse');
-        $mot_de_passe = $request->input('mot_de_passe');
-        $date_de_naissance = $request->input('date_de_naissance');
-        $telephone = $request->input('telephone');
+        $chauffeur = Chauffeur::where("id", $id)->exists();
 
-        // Find the requested post and put the requested data to the corresponding column
-        $chauffeur = Chauffeur::all()->find($id);;
-        $chauffeur->nom = $nom;
-        $chauffeur->prenom = $prenom;
-        $chauffeur->numpieceid = $numpieceid;
-        $chauffeur->salaire = $salaire;
-        $chauffeur->adresse = $adresse;
-        $chauffeur->mot_de_passe = $mot_de_passe;
-        $chauffeur->date_de_naissance = $date_de_naissance;
-        $chauffeur->telephone = $telephone;
+        if ($chauffeur) {
 
-        // Save the data
-        $chauffeur->save();
-
-        return redirect()->route('chauffeur.show', ['chauffeur' => $id]);
+            $info = Chauffeur::find($id);
+            $info -> nom = $request->nom;
+            $info -> prenom = $request->prenom;
+            $info -> numpieceid = $request->numpieceid;
+            $info -> adresse = $request->adresse;
+            $info -> salaire = $request->salaire;
+            $info -> login_chauffeur = $request->login_chauffeur;
+            $info -> mot_de_passe = $request->mot_de_passe;
+            $info -> date_de_naissance = $request->date_de_naissance;
+            $info -> telephone = $request->telephone;
+    
+            $info->save();
+            
+        return response()->json([
+            "status" => 1,
+            "message" => "Mis à jour effectué"
+           ]);
+       }else {
+        return response()->json([
+            "status" => 0,
+            "message" => "Mis à jour echoué"
+           ]);
+       }
     }
 
     /**
@@ -136,10 +113,19 @@ class ChauffeurController extends Controller
      */
     public function destroy(string $id)
     {
-        $chauffeur = Chauffeur::all()->find($id);
+        if ($chauffeur = Chauffeur::where("id", $id)->exists()) {
+            $chauffeur = Chauffeur::find($id);
 
-        $chauffeur->delete();
-
-        return redirect()->route('chauffeur.index');
+            $chauffeur->delete();
+            return response()->json([
+               "status" => 1,
+               "message" => "Suppression réussie"
+            ]);
+      }else {
+       return response()->json([
+           "status" => 0,
+           "message" => "Suppression échouée"
+        ]);
+      }
     }
 }

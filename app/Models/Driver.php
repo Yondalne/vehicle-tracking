@@ -29,11 +29,8 @@ class Driver extends Authenticatable
         'remember_token',
     ];
 
-    public function vehicles () {
-        return $this->belongsToMany(Vehicle::class, 'drive')->withPivot('created_at');
+    public function vehicle () {
+        return $this->hasMany(Vehicle::class);
     }
 
-    public function localizations() {
-        return $this->hasMany(Localization::class);
-    }
 }

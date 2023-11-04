@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Maintenance extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'driver_id',
+        'numfact',
+        'repsais',
+        'montantM',
+    ];
+
+    public function vehicle () {
+        return $this->belongsTo(Vehicle::class);
+    }
+
 }

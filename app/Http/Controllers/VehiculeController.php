@@ -43,33 +43,6 @@ class VehiculeController extends Controller
 
         $vehicule->save();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        // Get the data from the request
-        
-
-        // Create a new Post instance and put the requested data to the corresponding column
-        $vehicule = new Vehicule;
-        $vehicule->nom = $nom;
-        $vehicule->puissance = $puissance;
-        $vehicule->couleur = $couleur;
-        $vehicule->salaire = $salaire;
-        $vehicule->marque = $marque;
-        $vehicule->annee_premiere_mise_en_circulation = $annee_premiere_mise_en_circulation;
-       
-        
-      
-
-        // Save the data
-        $vehicule->save();
-
-        return redirect()->route('vehicule.index');
-    }
-
     /**
      * Display the specified resource.
      */
@@ -91,14 +64,6 @@ class VehiculeController extends Controller
            ], 404);
        }
        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

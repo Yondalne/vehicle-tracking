@@ -11,16 +11,12 @@ class Localization extends Model
 
     protected $fillable = [
         "vehicle_id",
-        "driver_id",
         "longitude",
         "latitude",
         "date",
         "hour",
     ];
 
-    public function driver () {
-        return $this->belongsTo(Driver::class);
-    }
 
     public function vehicle () {
         return $this->belongsTo(Vehicle::class);

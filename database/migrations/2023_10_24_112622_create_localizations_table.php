@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('localizations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained();
             $table->foreignId('vehicle_id')->constrained();
             $table->string('longitude');
             $table->string('latitude');
