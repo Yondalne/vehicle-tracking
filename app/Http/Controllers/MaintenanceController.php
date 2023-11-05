@@ -32,16 +32,22 @@ class MaintenanceController extends Controller
             "numfact" => "required",
             "repsais" => "required",
             "montantM" => "required",
-            "vehicle_id" => "required"
+            "vehicle_id" => "required",
+            "driver_id" => "required",
+            "date" => "required",
         ]);
 
-        $carburant = new Maintenance();
-        $carburant -> numfactCa = $request->numfactCa;
-        $carburant -> nblitre = $request->nblitre;
-        $carburant -> montant = $request->montant;
+        $maintenance = new Maintenance();
+        $maintenance -> numfact = $request->numfactCa;
+        $maintenance -> repsais = $request->nblitre;
+        $maintenance -> montantM = $request->montantM;
+        $maintenance -> date = $request->date;
+
+        $maintenance -> vehicle_id = $request->vehicle_id;
+        $maintenance -> driver_id = $request->driver_id;
 
 
-        $carburant->save();
+        $maintenance->save();
 
         return response()->json(["message" => "Success"], 200);
     }

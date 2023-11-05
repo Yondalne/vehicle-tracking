@@ -15,22 +15,22 @@ class Vehicle extends Model
         'color',
         'brand',
         'production_year',
-        'driver_id'
+        'is_attributed',
     ];
 
     public function driver() {
-        return $this->belongsTo(Driver::class);
+        return $this->belongsToMany(Driver::class, 'drive')->withPivot('created_at');
     }
 
     public function localizations() {
         return $this->hasMany(Localization::class);
     }
 
-    public function maintenances () {
+    public function maintenances() {
         return $this->hasMany(Maintenance::class);
     }
 
-    public function carburants () {
+    public function carburants() {
         return $this->hasMany(Carburant::class);
     }
 }

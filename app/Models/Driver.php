@@ -30,7 +30,18 @@ class Driver extends Authenticatable
     ];
 
     public function vehicles () {
-        return $this->hasMany(Vehicle::class);
+        return $this->belongsToMany(Vehicle::class, 'drive')->withPivot('created_at');
     }
 
+    public function maintenances () {
+        return $this->hasMany(Maintenance::class);
+    }
+
+    public function carburants () {
+        return $this->hasMany(Carburant::class);
+    }
+
+    public function localisations() {
+        return $this->hasMany(Localization::class);
+    }
 }

@@ -30,15 +30,15 @@ class LocalisationController extends Controller
     {
         $data = $request->validate([
             'vehicle_id' => 'required',
+            'driver_id' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
             'date' => 'required',
             'is_start' => '',
-            'is_end' => ''
         ]);
         Localization::create($data);
 
-        return response()->json(['success' => true], 200);
+        return response()->json(['message' => "Success"], 200);
     }
 
     /**

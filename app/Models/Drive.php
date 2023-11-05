@@ -4,26 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Maintenance extends Model
+class Drive extends Pivot
 {
     use HasFactory;
 
-    protected $fillable = [
-        'vehicle_id',
-        'driver_id',
-        'date',
-        'numfact',
-        'repsais',
-        'montantM',
-    ];
-
-    public function vehicle () {
+    public function vehicle() {
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function driver () {
+    public function driver() {
         return $this->belongsTo(Driver::class);
     }
-
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drive;
 use App\Models\Driver;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +28,7 @@ class AuthController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'user' => auth()->guard('driver')->user(),
+                'vehicle' => (Drive::where('driver_id', auth()->guard('driver')->user()->id)->orderBy('id', 'desc')->first())->vehicle,
             ], 200);
         }
 

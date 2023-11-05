@@ -14,20 +14,21 @@ class Controller extends BaseController
 
     public function maps(Vehicle $vehicle) {
 
-        // for ($i = 0; $i < 10; $i++) {
-        //     $data = [
-        //         'vehicle_id' => 1,
-        //         'longitude' => -3.980665 - ($i * 1),
-        //         'latitude' => 5.388055 + ($i * 1),
-        //         'date' => date('Y-m-d'),
-        //         'is_start' => $i == 0 ? 1 : 0,
-        //         'is_end' => $i == 9 ? 1 : 0
-        //     ];
-        //     Localization::create($data);
-        // }
+        for ($i = 0; $i < 10; $i++) {
+            $data = [
+                'vehicle_id' => 1,
+                'driver_id' => 1,
+                'longitude' => -3.980665 - ($i * 1),
+                'latitude' => 5.388055 + ($i * 1),
+                'date' => date('Y-m-d'),
+                'is_start' => $i == 0 ? 1 : 0,
+            ];
+            Localization::create($data);
+        }
 
         $localisations = $vehicle->localizations()->get()->groupBy('date')->first();
-        $initial = $vehicle->localizations()->where('is_start', '<>', null)->orderBy('date', 'desc')->first();
+        $initial = $vehicle->localizations()->orderBy('date', 'desc')->groupBy('date')->orderBy('created_at', 'desc')->first()[0];
+        dd($initial);
         return view('maps', compact('localisations', 'initial'));
     }
 }

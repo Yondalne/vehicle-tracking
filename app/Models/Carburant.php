@@ -11,6 +11,8 @@ class Carburant extends Model
 
     protected $fillable = [
         'vehicle_id',
+        'driver_id',
+        'date',
         'numfactCa',
         'nblitre',
         'montant',
@@ -18,5 +20,9 @@ class Carburant extends Model
 
     public function vehicle () {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function driver () {
+        return $this->belongsTo(Driver::class);
     }
 }

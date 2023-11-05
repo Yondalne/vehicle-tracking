@@ -33,13 +33,19 @@ class CarburantController extends Controller
             "numfactCa" => "required",
             "nblitre" => "required",
             "montant" => "required",
-            "vehicle_id" => "required"
+            "vehicle_id" => "required",
+            "driver_id" => "required",
+            "date" => "required", // format Year-Month-Day 2023-11-05
         ]);
 
         $carburant = new Carburant();
         $carburant -> numfactCa = $request->numfactCa;
         $carburant -> nblitre = $request->nblitre;
         $carburant -> montant = $request->montant;
+        $carburant -> date = $request->date;
+
+        $carburant -> vehicle_id = $request->vehicle_id;
+        $carburant -> driver_id = $request->driver_id;
 
 
         $carburant->save();
