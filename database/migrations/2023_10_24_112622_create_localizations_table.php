@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('latitude');
             $table->date('date');
             $table->time('hour')->nullable();
-            $table->boolean('is_start')->nullable();
             $table->timestamps();
         });
     }

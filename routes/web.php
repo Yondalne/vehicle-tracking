@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{vehicle}/map', [Controller::class, 'maps']);
+Route::get('/driver/{driver}/vehicle/{vehicle}/{date}/map', [Controller::class, 'maps']);
