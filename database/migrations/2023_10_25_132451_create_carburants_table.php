@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string("numfactCa")->unique();
             $table->double("nblitre");
             $table->double("montant");
-            $table->foreignId("driver_id")->constrained();
+            $table->foreignId("vehicle_id")->constrained();
             $table->timestamps();
         });
     }

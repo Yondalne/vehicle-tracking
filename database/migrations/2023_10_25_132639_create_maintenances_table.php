@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("numfact")->unique();
             $table->string("repsais");
             $table->double("montantM");
-            $table->foreignId("driver_id")->constrained();
+            $table->foreignId("vehicle_id")->constrained();
             $table->timestamps();
         });
     }

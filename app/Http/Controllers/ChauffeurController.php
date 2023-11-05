@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chauffeur;
+use App\Models\Driver;
 
 class ChauffeurController extends Controller
 {
@@ -12,13 +13,13 @@ class ChauffeurController extends Controller
      */
     public function index()
     {
-       $chauffeur = Chauffeur::get();
+       $chauffeur = Driver::get();
        return response()->json([
         "status" => 1,
         "message" => "Liste vehicules",
         "data" =>$chauffeur
        ], 200);
-      
+
     }
 
     /**
@@ -39,7 +40,7 @@ class ChauffeurController extends Controller
 
         ]);
 
-        $chauffeur = new Chauffeur();
+        $chauffeur = new Driver();
         $chauffeur -> nom = $request->nom;
         $chauffeur -> prenom = $request->prenom;
         $chauffeur -> numpieceid = $request->numpieceid;
@@ -52,16 +53,16 @@ class ChauffeurController extends Controller
 
         $chauffeur->save();
     }
-    
+
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $chauffeur = Chauffeur::where("id", $id)->exists();
+        $chauffeur = Driver::where("id", $id)->exists();
 
        if ($chauffeur) {
-            $info = chauffeur::find($id);
+            $info = Driver::find($id);
         return response()->json([
             "status" => 1,
             "message" => "chauffeur trouvé",
@@ -79,11 +80,11 @@ class ChauffeurController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $chauffeur = Chauffeur::where("id", $id)->exists();
+        $chauffeur = Driver::where("id", $id)->exists();
 
         if ($chauffeur) {
 
-            $info = Chauffeur::find($id);
+            $info = Driver::find($id);
             $info -> nom = $request->nom;
             $info -> prenom = $request->prenom;
             $info -> numpieceid = $request->numpieceid;
@@ -93,9 +94,9 @@ class ChauffeurController extends Controller
             $info -> mot_de_passe = $request->mot_de_passe;
             $info -> date_de_naissance = $request->date_de_naissance;
             $info -> telephone = $request->telephone;
-    
+
             $info->save();
-            
+
         return response()->json([
             "status" => 1,
             "message" => "Mis à jour effectué"
@@ -113,8 +114,8 @@ class ChauffeurController extends Controller
      */
     public function destroy(string $id)
     {
-        if ($chauffeur = Chauffeur::where("id", $id)->exists()) {
-            $chauffeur = Chauffeur::find($id);
+        if ($chauffeur = Driver::where("id", $id)->exists()) {
+            $chauffeur = Driver::find($id);
 
             $chauffeur->delete();
             return response()->json([

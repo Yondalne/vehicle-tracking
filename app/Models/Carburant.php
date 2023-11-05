@@ -10,7 +10,7 @@ class Carburant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'driver_id',
+        'vehicle_id',
         'numfactCa',
         'nblitre',
         'montant',

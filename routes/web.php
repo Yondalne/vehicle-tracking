@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChauffeurController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use App\Http\Controllers\ChauffeurController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{vehicle}/map', [Controller::class, 'maps']);

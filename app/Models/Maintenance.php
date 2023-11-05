@@ -10,7 +10,7 @@ class Maintenance extends Model
     use HasFactory;
 
     protected $fillable = [
-        'driver_id',
+        'vehicle_id',
         'numfact',
         'repsais',
         'montantM',

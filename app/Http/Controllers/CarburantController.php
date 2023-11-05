@@ -18,31 +18,33 @@ class CarburantController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Resquest $request)
+    public function create()
     {
-        $request->validate([
-            "numfactCa" => "required",
-            "nblitre" => "required",
-            "montant" => "required",
 
-        ]);
-
-        $carburant = new Carburant();
-        $carburant -> numfactCa = $request->numfactCa;
-        $carburant -> nblitre = $request->nblitre;
-        $carburant -> montant = $request->montant;
-        
-
-        $carburant->save();
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "numfactCa" => "required",
+            "nblitre" => "required",
+            "montant" => "required",
+            "vehicle_id" => "required"
+        ]);
+
+        $carburant = new Carburant();
+        $carburant -> numfactCa = $request->numfactCa;
+        $carburant -> nblitre = $request->nblitre;
+        $carburant -> montant = $request->montant;
+
+
+        $carburant->save();
+
+        return response()->json(["message" => "Success"], 200);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Localization;
 use Illuminate\Http\Request;
 
 class LocalisationController extends Controller
@@ -19,7 +20,7 @@ class LocalisationController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -27,7 +28,17 @@ class LocalisationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'vehicle_id' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'date' => 'required',
+            'is_start' => '',
+            'is_end' => ''
+        ]);
+        Localization::create($data);
+
+        return response()->json(['success' => true], 200);
     }
 
     /**

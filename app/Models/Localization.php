@@ -15,6 +15,8 @@ class Localization extends Model
         "latitude",
         "date",
         "hour",
+        "is_start",
+        "is_end",
     ];
 
 

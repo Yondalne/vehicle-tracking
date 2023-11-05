@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Maintenance;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
@@ -27,7 +28,22 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "numfact" => "required",
+            "repsais" => "required",
+            "montantM" => "required",
+            "vehicle_id" => "required"
+        ]);
+
+        $carburant = new Maintenance();
+        $carburant -> numfactCa = $request->numfactCa;
+        $carburant -> nblitre = $request->nblitre;
+        $carburant -> montant = $request->montant;
+
+
+        $carburant->save();
+
+        return response()->json(["message" => "Success"], 200);
     }
 
     /**
