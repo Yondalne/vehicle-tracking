@@ -29,10 +29,14 @@ class AuthController extends Controller
                 'access_token' => $token,
                 'user' => auth()->guard('driver')->user(),
                 'vehicle' => (Drive::where('driver_id', auth()->guard('driver')->user()->id)->orderBy('id', 'desc')->first())->vehicle,
+                'status' => 200,
             ], 200);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json([
+            'error' => 'Unauthorized',
+            'status' => 401,
+        ], 401);
     }
 
 

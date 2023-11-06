@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double("montant");
             $table->foreignId("vehicle_id")->constrained();
             $table->foreignId("driver_id")->constrained();
-            $table->foreignId("date")->constrained();
+            $table->date("date");
             $table->timestamps();
         });
     }
