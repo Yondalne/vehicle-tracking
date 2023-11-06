@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
+use Exception;
 use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
@@ -47,9 +48,12 @@ class MaintenanceController extends Controller
         $maintenance -> driver_id = $request->driver_id;
 
 
-        $maintenance->save();
-
-        return response()->json(["message" => "Success"], 200);
+        try {
+            $maintenance->save();
+            return response()->json(["message" => "Success"], 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => "Error"], 401);
+        }
     }
 
     /**

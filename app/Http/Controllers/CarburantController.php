@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carburant;
+use Exception;
 
 class CarburantController extends Controller
 {
@@ -47,10 +48,13 @@ class CarburantController extends Controller
         $carburant -> vehicle_id = $request->vehicle_id;
         $carburant -> driver_id = $request->driver_id;
 
+        try {
+            $carburant->save();
+            return response()->json(["message" => "Success"], 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => "Error"], 401);
+        }
 
-        $carburant->save();
-
-        return response()->json(["message" => "Success"], 200);
     }
 
     /**
