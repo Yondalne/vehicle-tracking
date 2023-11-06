@@ -35,14 +35,13 @@ class MaintenanceController extends Controller
             "montantM" => "required",
             "vehicle_id" => "required",
             "driver_id" => "required",
-            "date" => "required",
         ]);
 
         $maintenance = new Maintenance();
         $maintenance -> numfact = $request->numfactCa;
         $maintenance -> repsais = $request->nblitre;
         $maintenance -> montantM = $request->montantM;
-        $maintenance -> date = $request->date;
+        $maintenance -> date = date('Y-m-d');
 
         $maintenance -> vehicle_id = $request->vehicle_id;
         $maintenance -> driver_id = $request->driver_id;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Localization;
+use Exception;
 use Illuminate\Http\Request;
 
 class LocalisationController extends Controller
@@ -33,12 +34,16 @@ class LocalisationController extends Controller
             'driver_id' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
-            'date' => 'required',
             'is_start' => '',
         ]);
-        Localization::create($data);
-
-        return response()->json(['message' => "Success"], 200);
+        
+        $data['date'] = date("Y-m-d");
+        try {
+            Localization::create($data);
+            return response()->json(["message" => "Success"], 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => "Error"], 401);
+        }
     }
 
     /**
