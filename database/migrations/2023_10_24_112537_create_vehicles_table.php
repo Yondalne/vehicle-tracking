@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('power');
             $table->string('color');
             $table->string('brand');
-            $table->date('production_year');
+            $table->year('production_year');
             $table->boolean('is_attributed')->default(0);
             $table->timestamps();
         });

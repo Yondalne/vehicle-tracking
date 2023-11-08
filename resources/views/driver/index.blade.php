@@ -1,258 +1,145 @@
 @extends('layouts.app')
 @section('main')
-  <main id="main" class="main">
+<main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{{ route('driver.index') }}">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
+        <h1>Data Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">Data</li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
-      <div class="row">
+        <div class="row">
 
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
+            <div class="col-lg-4">
+                <div class="d-flex justify-content-center">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="pt-4 pb-2">
+                                <h5 class="card-title text-center pb-0 fs-4">Driver Registration</h5>
+                            </div>
+                            <form action="{{ route('driver.store') }}" method="POST" class="row g-3 needs-validation"
+                                novalidate>
+                                @csrf
+                                <div class="col-12">
+                                    <label for="yourName" class="form-label">Nom</label>
+                                    <input type="text" name="second_name" class="form-control" id="yourName" required>
+                                    <div class="invalid-feedback">Veuillez entrer votre nom.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="yourfirstname" class="form-label">Prenom</label>
+                                    <input type="text" name="first_name" class="form-control" id="yourfirstname"
+                                        required>
+                                    <div class="invalid-feedback">Veuillez entrer votre prénom.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="phone" class="form-label">Contact</label>
+                                    <input type="tel" name="phone" class="form-control" id="contact" required>
+                                    <div class="invalid-feedback">Veuillez entrer un contact valide.</div>
+                                </div>
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
+                                <div class="col-12">
+                                    <label for="cni" class="form-label">Numero CNI</label>
+                                    <input type="text" name="cni" class="form-control" id="cni" required>
+                                    <div class="invalid-feedback">Veuillez entrer un contact valide.</div>
+                                </div>
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Drivers <span>| Nombre</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
+                                <div class="col-12">
+                                    <label for="salary" class="form-label">Salaire</label>
+                                    <input type="text" name="salary" class="form-control" id="salary" required>
+                                    <div class="invalid-feedback">Veuillez entrer un contact valide.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Adresse mail</label>
+                                    <input type="email" name="email" class="form-control" id="email" required>
+                                    <div class="invalid-feedback">Veuillez choisir une adresse.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="address" class="form-label">Adresse </label>
+                                    <input type="address" name="address" class="form-control" id="email" required>
+                                    <div class="invalid-feedback">Veuillez choisir une adresse.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="birthday" class="form-label">Date de naissance</label>
+                                    <input type="date" name="birthday" class="form-control" id="birthday" required>
+                                    <div class="invalid-feedback">Veuillez choisir un âge valide.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="password" class="form-label">Votre Mot de passe</label>
+                                    <input type="password" name="password" class="form-control" id="password" required>
+                                    <div class="invalid-feedback">Veuillez entrer l'immatriculation du véhicule.</div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary" type="submit">Soumettre le formulaire</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
                 </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Maintenance <span>| Nombre</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Fuel <span>| Quantité</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
-           
-            <!-- Recent Sales -->
-            <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Drivers List <span></span></h5>
-
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Immatriculation</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {{--  Ecrire ICI
-                    @foreach ($viewData["products"] as $product)
-                      <tr>
-                        <th scope="row">{{ $model->getId() }}</th>
-                        <td>{{ $model->get() }}</td>
-                        <td>{{ $model->get() }}</td>
-                        <th scope="row">{{ $model->get() }}</th>
-                        <td>{{ $model->get() }}</td>
-                      </tr>
-                    @endforeach
-                    --}}
-                      
-                      
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
             </div>
-           
+            <div class="col-lg-8">
+                <div class="row">
 
-          </div>
-        </div><!-- End Left side columns -->
 
-        <!-- Right side columns -->
-        <div class="col-lg-4">
 
-        <div class="d-flex justify-content-center">
-                
-              <div class="card mb-3">
 
-                <div class="card-body">
 
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Driver Registration</h5>
-                  </div>
+                    <!-- Recent Sales -->
+                    <div class="col-lg-12">
+                        <div class="card recent-sales overflow-auto">
 
-                  <form class="row g-3 needs-validation" novalidate>
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Nom</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
+                            
+
+                            <div class="card-body">
+                                <h5 class="card-title">Datatables</h5>
+
+                                <!-- Table with stripped rows -->
+                                <table class="table">
+
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Date de naissance</th>
+                                            <th scope="col">Adresse</th>
+                                            <th scope="col">Salaire</th>
+                                            <th scope="col">Téléphone</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($drivers as $driver)
+                                        <tr>
+                                            <th scope="row">{{ $driver->id }}</th>
+                                            <td>{{ $driver->second_name }}</td>
+                                            <td>{{ $driver->email }}</td>
+                                            <td>{{ $driver->birthday }}</td>
+                                            <td>{{ $driver->address }}</td>
+                                            <td>{{$driver->salary}}</td>
+                                            <td>{{ $driver->phone }}</td>
+                                            <td>{{ $driver->is_associated ? 1 : 0 }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                <!-- End Table with stripped rows -->
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Prenom</label>
-                      <input type="text" name="firstname" class="form-control" id="yourfirstname" required>
-                      <div class="invalid-feedback">Please, enter your firstname!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Contact</label>
-                      <input type="text" name="date" class="form-control" id="date" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Adresse</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose.</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Age</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose.</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Vehicule Immatriculation</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose.</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary" type="submit">Submit form</button>
-                    </div>
-
-                   
-                  </form>
 
                 </div>
-              </div>
-          
-        </div><!-- End Right side columns -->
 
-      </div>
+            </div>
     </section>
 
-  </main><!-- End #main -->
-
-
+</main><!-- End #main -->
 @endsection

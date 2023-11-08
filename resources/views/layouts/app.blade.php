@@ -38,7 +38,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="{{ route('driver.index') }}" class="logo d-flex align-items-center">
+      <a href="{{ route('vehicle.index') }}" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">ProprioAdmin</span>
       </a>
@@ -257,18 +257,25 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('driver.index') }}">
+        <a class="nav-link " href="{{ route('vehicle.index') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('driver.listing') }}">
+        <a class="nav-link collapsed" href="{{ route('driver.index') }}">
           <i class="bi bi-card-list"></i>
           <span>Drivers</span>
         </a>
       </li><!-- End Tables Nav --> 
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('vehicle.attribution') }}">
+          <i class="bi bi-card-list"></i>
+          <span>Attribution</span>
+        </a>
+      </li><!-- End Tables Nav -->   
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('vehicle.track') }}">

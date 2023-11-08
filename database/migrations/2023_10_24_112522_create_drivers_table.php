@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('salary');
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('is_associated')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -4,19 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        $vehicle = Vehicle::all();
+        $vehicles = Vehicle::all(); // Charger tous les véhicules depuis la base de données
 
-        return view('vehicle.index', [
-            'vehicle' => $vehicle,
-        ]);
+    return view('vehicle.index', ['vehicles' => $vehicles]);
     }
 
     /**
@@ -39,26 +38,18 @@ class VehicleController extends Controller
             "brand" => "required",
             "production_year" => "required",
             "is_attributed" => "required"
-
         ]);
-        // Get the data from the request
-        $serial = $request->input('serial');
-        $power = $request->input('power');
-        $color = $request->input('color');
-        $brand = $request->input('brand');
-        $production_year = $request->input('production_year');
-        $is_attributed = $request->input('is_attributed');
-
-        // Create a new Vehicle instance and put the requested data to the corresponding column
+        
+        // Créez une nouvelle instance de Vehicle et remplissez les données demandées dans les colonnes correspondantes
         $vehicle = new Vehicle;
-        $vehicle->serial = $serial;
-        $vehicle->power = $power;
-        $vehicle->color = $color;
-        $vehicle->brand = $brand;
-        $vehicle->production_year = $production_year;
-        $vehicle->is_attributed = $is_attributed;
+        $vehicle->serial = $request->input('serial');
+        $vehicle->power = $request->input('power');
+        $vehicle->color = $request->input('color');
+        $vehicle->brand = $request->input('brand');
+        $vehicle->production_year = $request->input('production_year');
+        $vehicle->is_attributed = $request->input('is_attributed');
 
-        // Save the data
+        // Enregistrez les données
         $vehicle->save();
 
         return redirect()->route('vehicle.index');
@@ -69,8 +60,6 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::all()->find($id);
-
         return view('vehicle.show', [
             'vehicle' => $vehicle,
         ]);
@@ -81,8 +70,6 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::all()->find($id);
-
         return view('vehicle.edit', [
             'vehicle' => $vehicle,
         ]);
@@ -91,27 +78,44 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, String $id)
+    public function update(Request $request, Vehicle $vehicle)
     {
-        $serial = $request->input('serial');
-        $power = $request->input('power');
-        $color = $request->input('color');
-        $brand = $request->input('brand');
-        $production_year = $request->input('production_year');
-        $is_attributed = $request->input('is_attributed');
+        $request->validate([
+            "serial" => "required",
+            "power" => "required",
+            "color" => "required",
+            "brand" => "required",
+            "production_year" => "required",
+            "is_attributed" => "required"
+        ]);
 
-        $driver = Vehicle::all()->find($id);
+        // Mettez à jour les données du modèle Vehicle
+        $vehicle->serial = $request->input('serial');
+        $vehicle->power = $request->input('power');
+        $vehicle->color = $request->input('color');
+        $vehicle->brand = $request->input('brand');
+        $vehicle->production_year = $request->input('production_year');
+        $vehicle->is_attributed = $request->input('is_attributed');
+        $vehicle->save();
+
+        return redirect()->route('vehicle.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(String $id)
+    public function destroy(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::all()->find($id);
-
         $vehicle->delete();
 
         return redirect()->route('vehicle.index');
+    }
+
+    public function attribution()
+    {
+
+        $viewData = [];
+        $viewData["title"] = "Home Page - Online Store";
+        return view('vehicle.attribution')->with("viewData", $viewData);
     }
 }

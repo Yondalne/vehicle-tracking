@@ -16,25 +16,29 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/driver/{driver}/vehicle/{vehicle}/{date}/map', [Controller::class, 'maps']);
 
-
 // ---------DRIVER------------
-Route::get('/dashboard', 'App\Http\Controllers\DriverController@index')->name("driver.index");
+
 Route::get('/profil', 'App\Http\Controllers\DriverController@profil')->name("driver.profil");
-Route::get('/drivers', 'App\Http\Controllers\DriverController@driverlist')->name("driver.listing");
+Route::get('/drivers', 'App\Http\Controllers\DriverController@index')->name("driver.index");
 Route::get('/signout', 'App\Http\Controllers\DriverController@signout')->name("driver.signout");
-Route::get('/', 'App\Http\Controllers\DriverController@sign')->name("driver.sign");
+Route::post('/store', 'App\Http\Controllers\DriverController@store')->name("driver.store");
 
 // ---------VEHICULE----------
+Route::get('/dashboard', 'App\Http\Controllers\VehicleController@index')->name("vehicle.index");
+Route::post('/store/vehicle', 'App\Http\Controllers\VehicleController@store')->name("vehicle.store");
 Route::get('/track', 'App\Http\Controllers\VehicleController@track')->name("vehicle.track");
 Route::get('/fuel', 'App\Http\Controllers\VehicleController@fuel')->name("vehicle.fuel");
 
-Route::get('/maintenance', 'App\Http\Controllers\VehicleController@maintenance')->name("vehicle.maintenance");
+
+Route::get('/maintenance', 'App\Http\Controllers\MaintenanceController@index')->name("vehicle.maintenance");
+Route::post('/maintenance/search', 'App\Http\Controllers\MaintenanceController@search')->name("maintenance.search");
+
+
+Route::get('/attribution', 'App\Http\Controllers\DriveController@index')->name("vehicle.attribution");
+Route::post('/store/attribution', 'App\Http\Controllers\DriveController@store')->name("attribution.store");
 
 
 

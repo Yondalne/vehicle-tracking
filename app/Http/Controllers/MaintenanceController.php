@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Maintenance;
+use App\Models\Driver;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,17 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        //
+        
+        $maintenances = Maintenance::all(); // Charger tous les véhicules depuis la base de données
+        $drivers= Driver::all();
+
+        return view('vehicle.maintenance', ['maintenances' => $maintenances,
+            'drivers'=>$drivers
+    ]);
+
+    }
+    public function serach(){
+
     }
 
     /**

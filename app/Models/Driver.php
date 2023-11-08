@@ -22,6 +22,7 @@ class Driver extends Authenticatable
         'salary',
         'email',
         'password',
+        'is_associated',
     ];
 
     protected $hidden = [

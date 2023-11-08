@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
+
 use App\Models\Driver;
 
 class DriverController extends Controller
@@ -10,16 +13,14 @@ class DriverController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function driverlist(): View
+    public function index()
     {
       
-        $driver = Driver::all();
+        $drivers = Driver::all(); // Charger tous les véhicules depuis la base de données
 
-        return view('driver.index', [
-            'driver' => $driver,
-        ]);
+        return view('driver.index', ['drivers' => $drivers]);
 
-    }
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -30,11 +31,48 @@ class DriverController extends Controller
 
     }
 
-    public function sign(Request $request): RedirectResponse
+    public function profil(){
+        $viewData = [];
+        $viewData["title"] = "Home Page - Online Store";
+        return view('driver.profil')->with("viewData", $viewData);
+    }
+
+    public function signout(){
+        $viewData = [];
+        $viewData["title"] = "Home Page - Online Store";
+        return view('driver.signout')->with("viewData", $viewData);
+    }
+
+    public function sign(){
+        $viewData = [];
+        $viewData["title"] = "Home Page - Online Store";
+        return view('driver.sign')->with("viewData", $viewData);
+    }
+
+    public function driverlist(){
+        $viewDat = [];
+        $viewDat["title"] = "Home Page - Online Stor";
+        return view('driver.listing')->with("viewData", $viewDat);
+    }
+
+    public function store(Request $request): RedirectResponse
     {
+        //dd($request->all());
+        $request->validate([
+            "first_name" => "required",
+            "second_name" => "required",
+            "cni" => "required",
+            "address" => "required",
+            "salary" => "required",
+            "email" => "required",
+            "birthday" => "required",
+            "password" => "required",
+            "phone" => "required"
+
+        ]);
         // Get the data from the request
-        $second_name = $request->input('second_name');
         $first_name = $request->input('first_name');
+        $second_name = $request->input('second_name');
         $cni = $request->input('cni');
         $address = $request->input('address');
         $salary = $request->input('salary');
@@ -54,9 +92,10 @@ class DriverController extends Controller
         $driver->password = $password;
         $driver->birthday = $birthday;
         $driver->phone = $phone;
-
         // Save the data
         $driver->save();
+
+        
 
         return redirect()->route('driver.index');
     }
@@ -71,7 +110,7 @@ class DriverController extends Controller
         $driver = Driver::all()->find($id);
 
         return view('driver.show', [
-            'driver' => $driver,
+            'drivers' => $driver,
         ]);
     }
 
@@ -79,7 +118,7 @@ class DriverController extends Controller
         $driver = Driver::all()->find($id);
 
         return view('driver.edit', [
-            'driver' => $driver,
+            'drivers' => $driver,
         ]);
     }
     /**
@@ -110,12 +149,12 @@ class DriverController extends Controller
         $driver->birthday = $birthday;
         $driver->phone = $phone;
 
-
+      
 
         // Save the data
         $driver->save();
 
-        return redirect()->route('driver.show', ['driver' => $id]);
+        return redirect()->route('driver.show', ['drivers' => $id]);
     }
 
     /**

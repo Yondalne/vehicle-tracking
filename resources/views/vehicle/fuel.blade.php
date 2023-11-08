@@ -82,10 +82,18 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Données <span></span></h5>
 
-                                    <table class="table table-borderless datatable">
+                                    <label for="name">Name</label>
+                                         <select name="carburant_id" id="carburant_id">
+                                            @foreach ($carburants as $carburant)
+                                                <option value="{{ $carburant->id }}">{{ $carburant->driver->second_name }}</option>
+                                            @endforeach
+                                         </select>
+
+                                         @if(isset($carburant))
+
+                                        <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Vehicule Imm</th>
                                                 <th scope="col">Quantité</th>
@@ -93,19 +101,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {{--  Ecrire ICI
-                                            @foreach ($viewData["products"] as $product)
+                                            @foreach ($carburants as $carburant)
                                             <tr>
-                                                <th scope="row">{{ $model->getId() }}</th>
-                                                <td>{{ $model->get() }}</td>
-                                                <td>{{ $model->get() }}</td>
-                                                <th scope="row">{{ $model->get() }}</th>
-                                                <td>{{ $model->get() }}</td>
+                                                <td>{{$carburant->id}}</td>
+                                                <td>{{}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
-                                            @endforeach
-                                        --}}
-
-                                        </tbody>
+                                    </tbody>
                                     </table>
 
                                 </div>

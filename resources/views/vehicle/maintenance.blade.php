@@ -22,22 +22,25 @@
                             <h5 class="card-title">maintenance Details</h5>
 
                             <!-- Browser Default Validation -->
-                            <form class="row g-3">
+                            <form action="" class="row g-3">
                                 <div class="col-md-4">
                                     <label for="validationDefault01" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="validationDefault01" value="John"
-                                        required>
+                                     <select name="driver_id" id="driver_id">
+                                            @foreach ($drivers as $driver)
+                                                <option value="{{ $driver->id }}">{{ $driver->first_name." ".$driver->second_name }}</option>
+                                            @endforeach
+                                         </select>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationDefault02" class="form-label">Début</label>
-                                    <input type="date" class="form-control" id="validationDefault02" value="Doe"
+                                    <input type="date" class="form-control" name="datedebut" id="validationDefault02" value="1900-01-01"
                                         required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationDefaultUsername" class="form-label">Fin</label>
                                     <div class="input-group">
                                         
-                                        <input type="date" class="form-control" id="validationDefaultUsername"
+                                        <input type="date" name="datefin" class="form-control" id="validationDefaultUsername" value="2050-01-01"
                                             aria-describedby="inputGroupPrepend2" required>
                                     </div>
                                 </div>
@@ -82,31 +85,35 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Données <span></span></h5>
 
-                                    <table class="table table-borderless datatable">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col">Vehicule Imm</th>
-                                                <th scope="col">Quantité</th>
-                                                <th scope="col">Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {{--  Ecrire ICI
-                                            @foreach ($viewData["products"] as $product)
-                                            <tr>
-                                                <th scope="row">{{ $model->getId() }}</th>
-                                                <td>{{ $model->get() }}</td>
-                                                <td>{{ $model->get() }}</td>
-                                                <th scope="row">{{ $model->get() }}</th>
-                                                <td>{{ $model->get() }}</td>
-                                            </tr>
+                                         <label for="name">Name</label>
+                                         <select name="maintenance_id" id="maintenance_id">
+                                            @foreach ($maintenances as $maintenance)
+                                                <option value="{{ $maintenance->id }}">{{ $maintenance->driver->second_name }}</option>
                                             @endforeach
-                                        --}}
+                                         </select>
 
-                                        </tbody>
-                                    </table>
+                                            @if(isset($maintenance))
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Nom</th>
+                                                            <th scope="col">Véhicule Imm</th>
+                                                            <th scope="col">Montant</th>
+                                                            <th scope="col">Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>{{ $maintenance->driver->second_name }}</td>
+                                                                <td>{{ $maintenance->vehicle_id }}</td>
+                                                                <td>{{ $maintenance->montantM }}</td>
+                                                                <td>{{ $maintenance->date }}</td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                        <td>Total :  </td>
+                                                    </table>
+                                                @endif
 
                                 </div>
 
