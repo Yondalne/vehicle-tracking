@@ -60,20 +60,21 @@ class MaintenanceController extends Controller
         ->whereBetween('maintenances.c', [$request->datedebut, $request->datefin])
         ->groupBy('vehicles.id', 'drivers.id')
         ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
-        ->selectRaw('vehicles.serial as Immatriulation')
+        ->selectRaw('vehicles.serial as Immatriculation')
         ->selectRaw('SUM(maintenances.montantM) as Total')
         ->get();
-
         $totalM = 0;
         foreach ($results as $result) {
             $totalM += $result->Total;
         }
 
-        return redirect()->route('vehicle.maintenance', ['maintenances' => $maintenances,
-        'drivers'=>$drivers,
-        'vehicles'=>$vehicles, 
-        'results'=>$results,
-        'totalM' => $totalM]);
+        return view('vehicle.maintenance', ['maintenances' => $maintenances,
+            'drivers'=>$drivers,
+            'vehicles'=>$vehicles, 
+            'results'=>$results,
+            'totalM' => $totalM
+
+    ]);
     }
 
     /**

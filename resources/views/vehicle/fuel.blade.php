@@ -15,7 +15,7 @@
         <section class="section dashboard">
             <div class="row">
                 <!-- Right side columns -->
-                <div class="col-lg-4">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
@@ -23,6 +23,29 @@
 
                             <!-- Browser Default Validation -->
         
+                            <form action="{{ route('fuel.search') }}" method="post" class="row g-3">
+                                @csrf
+                                <div class="col-md-4">
+                                    <label for="validationDefault01" class="form-label">First name</label><br>
+                                     <select name="driver_id" id="driver_id" class="form-select form-select-md mb-3" aria-label="Large select example">
+                                            @foreach ($drivers as $driver)
+                                                <option value="{{ $driver->id }}">{{ $driver->first_name." ".$driver->second_name }}</option>
+                                            @endforeach
+                                         </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationDefault02" class="form-label">Début</label>
+                                    <input type="date" class="form-control" name="datedebut" id="validationDefault02" value="1900-01-01"
+                                        required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationDefaultUsername" class="form-label">Fin</label>
+                                    <div class="input-group">
+                                        
+                                        <input type="date" name="datefin" class="form-control" id="validationDefaultUsername" value="2050-01-01"
+                                            aria-describedby="inputGroupPrepend2" required>
+                                    </div>
+                                </div>
 
                                 <div class="col-12">
                                     <button class="btn btn-primary" type="submit">Submit form</button>
@@ -63,33 +86,22 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">Données <span></span></h5>
-
-                                    <div class="col-md-4">
-                                    <label for="validationDefault01" class="form-label">First name</label><br>
-                                     <select name="driver_id" id="driver_id" class="form-select form-select-md mb-3" aria-label="Large select example">
-                                            @foreach ($drivers as $driver)
-                                                <option value="{{ $driver->id }}">{{ $driver->first_name." ".$driver->second_name }}</option>
-                                            @endforeach
-                                         </select>
-                                </div>
-
                                         <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Vehicule Imm</th>
-                                                <th scope="col">Quantité</th>
-                                                <th scope="col">Date</th>
+                                                <th scope="col">Montant total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($carburants as $carburant)
+                                            @foreach ($results as $result)
                                             <tr>
-                                                <td>{{$carburant->id}}</td>c
-                                                <td>{{$carburant->driver->first_name." ".driver->second_name}}</td>
-                                                <td>{{$carburant->vehicle->serial}}</td>
-                                                <td>{{$carburant->nblitre}}</td>
+                                                <td>{{$result->id}}</td>c
+                                                <td>{{$result->Nom_Prenoms}}</td>
+                                                <td>{{$result->Immatriculation }}</td>
+                                                <td>{{$result->Total}}</td>
                                                 <td></td>
                                                
                                             </tr>

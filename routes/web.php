@@ -33,6 +33,7 @@ Route::get('/track', 'App\Http\Controllers\VehicleController@track')->name("vehi
 
 
 Route::get('/fuel', 'App\Http\Controllers\CarburantController@index')->name("vehicle.fuel");
+Route::post('/fuel/search', 'App\Http\Controllers\CarburantController@search')->name("fuel.search");
 
 
 Route::get('/maintenance', 'App\Http\Controllers\MaintenanceController@index')->name("vehicle.maintenance");
