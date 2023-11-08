@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function maps(Driver $driver, Vehicle $vehicle, $date = null) {
+    public function maps(Driver $driver, $date = null) {
 
         if (empty($date)) {
             $date = date('Y-m-d');
@@ -30,7 +30,7 @@ class Controller extends BaseController
         //     Localization::create($data);
         // }
 
-        $localisations = Localization::where('vehicle_id', $vehicle->id)->where('driver_id', $driver->id)->where('date', $date)->orderBy('id', "asc")->get();
+        $localisations = Localization::where('driver_id', $driver->id)->where('date', $date)->orderBy('id', "asc")->get();
         $initial = $localisations[0];
         return view('maps', compact('localisations', 'initial'));
     }

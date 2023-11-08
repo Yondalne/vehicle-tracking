@@ -51,7 +51,7 @@ class CarburantController extends Controller
             $carburant->save();
             return response()->json(["message" => "Success"], 200);
         } catch (Exception $e) {
-            return response()->json(["message" => "Error"], 401);
+            return response()->json(["message" => $e], 401);
         }
 
     }
