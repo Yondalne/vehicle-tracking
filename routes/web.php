@@ -17,7 +17,7 @@ use App\Http\Controllers\Controller;
 */
 
 
-Route::get('/driver/{driver}/{date}/map', [Controller::class, 'maps']);
+Route::get('/map', [Controller::class, 'maps']);
 
 // ---------DRIVER------------
 

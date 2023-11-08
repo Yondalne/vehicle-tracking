@@ -47,12 +47,12 @@ class CarburantController extends Controller
         $carburant -> vehicle_id = $request->vehicle_id;
         $carburant -> driver_id = $request->driver_id;
 
-        try {
+        // try {
             $carburant->save();
             return response()->json(["message" => "Success"], 200);
-        } catch (Exception $e) {
-            return response()->json(["message" => $e], 401);
-        }
+        // } catch (Exception $e) {
+            // return response()->json(["message" => $e], 401);
+        // }
 
     }
 
