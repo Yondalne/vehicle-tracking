@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Maintenance;
 use App\Models\Driver;
+use App\Models\Vehicle;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -17,14 +18,63 @@ class MaintenanceController extends Controller
 
         $maintenances = Maintenance::all(); // Charger tous les véhicules depuis la base de données
         $drivers= Driver::all();
+        $vehicles= Vehicle::all();
+    
+        $results = DB::table('maintenances')
+        ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
+        ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
+        ->select('vehicles.serial as Immatriculation', DB::Raw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms'), DB::Raw('SUM(maintenances.montantM) as Total'))
+        ->groupBy('vehicles.id', 'drivers.id')
+        ->get();
 
+        $totalM = 0;
+        foreach ($results as $result) {
+            $totalM += $result->Total;
+        }
+            
         return view('vehicle.maintenance', ['maintenances' => $maintenances,
-            'drivers'=>$drivers
+            'drivers'=>$drivers,
+            'vehicles'=>$vehicles, 
+            'results'=>$results,
+            'totalM' => $totalM
+
     ]);
 
     }
-    public function serach(){
+    public function search(Request $request){
 
+        $maintenances = Maintenance::all(); // Charger tous les véhicules depuis la base de données
+        $drivers= Driver::all();
+        $vehicles= Vehicle::all();
+
+        $request->validate([
+            "driver_id" => "required",
+            "datedebut" => "required",
+            "datefin" => "required"
+        ]);
+
+        $results = DB::table('maintenances')
+        ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
+        ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
+        ->where('drivers.id', $request->driver_id)
+        ->whereBetween('maintenances.c', [$request->datedebut, $request->datefin])
+        ->groupBy('vehicles.id', 'drivers.id')
+        ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
+        ->selectRaw('vehicles.serial as Immatriculation')
+        ->selectRaw('SUM(maintenances.montantM) as Total')
+        ->get();
+        $totalM = 0;
+        foreach ($results as $result) {
+            $totalM += $result->Total;
+        }
+
+        return view('vehicle.maintenance', ['maintenances' => $maintenances,
+            'drivers'=>$drivers,
+            'vehicles'=>$vehicles, 
+            'results'=>$results,
+            'totalM' => $totalM
+
+    ]);
     }
 
     /**
@@ -32,7 +82,8 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        //
+        
+
     }
 
     /**
