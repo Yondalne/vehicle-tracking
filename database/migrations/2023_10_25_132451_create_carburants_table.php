@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carburants', function (Blueprint $table) {
+            $table->id();
             $table->string("numfactCa")->unique();
             $table->double("nblitre");
             $table->double("montant");
