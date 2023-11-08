@@ -98,9 +98,41 @@
         zoom: 12, // starting zoom
     });
 
+    map.on('load', () => {
+        map.addSource('route', {
+            'type': 'geojson',
+            'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        @forelse ($localisations as $local)
+                            [{{$local->longitude}}, {{$local->latitude}}],
+                        @empty
+                        @endforelse
+                    ]
+                }
+            }
+        });
+        map.addLayer({
+            'id': 'route',
+            'type': 'line',
+            'source': 'route',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': '#888',
+                'line-width': 8
+            }
+        });
+    });
     @forelse ($localisations as $local)
         let marker{{$loop->index}} = new mapboxgl.Marker()
             .setLngLat([ {{$local->longitude}}, {{$local->latitude}} ])
+            .setPopup(new mapboxgl.Popup().setHTML("<h1>{{$local->created_at->format('H:i:s')}}</h1>"))
             .addTo(map);
     @empty
     @endforelse

@@ -28,7 +28,7 @@ class AuthController extends Controller
             return response()->json([
                 'access_token' => $token,
                 'user' => auth()->guard('driver')->user(),
-                'vehicle' => (Drive::where('driver_id', auth()->guard('driver')->user()->id)->orderBy('id', 'desc')->first())->vehicle,
+                'vehicle' => (Drive::where('driver_id', auth()->guard('driver')->user()->id)->orderBy('id', 'desc')->first()) ?(Drive::where('driver_id', auth()->guard('driver')->user()->id)->orderBy('id', 'desc')->first())->vehicle : [],
                 'status' => 200,
             ], 200);
         }

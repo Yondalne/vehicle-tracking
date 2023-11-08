@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('maintenances', function (Blueprint $table) {
-
+            $table->id();
             $table->string("numfact")->unique();
             $table->string("repsais");
             $table->double("montantM");
             $table->foreignId("vehicle_id")->constrained();
             $table->foreignId("driver_id")->constrained();
-            $table->date("c");
+            $table->date("date");
             $table->timestamps();
         });
     }

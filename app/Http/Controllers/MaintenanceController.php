@@ -14,7 +14,7 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        
+
         $maintenances = Maintenance::all(); // Charger tous les véhicules depuis la base de données
         $drivers= Driver::all();
 
@@ -49,8 +49,8 @@ class MaintenanceController extends Controller
         ]);
 
         $maintenance = new Maintenance();
-        $maintenance -> numfact = $request->numfactCa;
-        $maintenance -> repsais = $request->nblitre;
+        $maintenance -> numfact = $request->numfact;
+        $maintenance -> repsais = $request->repsais;
         $maintenance -> montantM = $request->montantM;
         $maintenance -> date = date('Y-m-d');
 
@@ -58,12 +58,12 @@ class MaintenanceController extends Controller
         $maintenance -> driver_id = $request->driver_id;
 
 
-        try {
+        // try {
             $maintenance->save();
             return response()->json(["message" => "Success"], 200);
-        } catch (Exception $e) {
+        // } catch (Exception $e) {
             return response()->json(["message" => "Error"], 401);
-        }
+        // }
     }
 
     /**

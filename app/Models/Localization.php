@@ -15,7 +15,6 @@ class Localization extends Model
         "longitude",
         "latitude",
         "date",
-        "hour",
     ];
 
 

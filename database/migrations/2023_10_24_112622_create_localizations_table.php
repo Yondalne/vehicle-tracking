@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('longitude');
             $table->string('latitude');
             $table->date('date');
-            $table->time('hour')->nullable();
             $table->timestamps();
         });
     }
