@@ -30,7 +30,9 @@ Route::post('/store', 'App\Http\Controllers\DriverController@store')->name("driv
 Route::get('/dashboard', 'App\Http\Controllers\VehicleController@index')->name("vehicle.index");
 Route::post('/store/vehicle', 'App\Http\Controllers\VehicleController@store')->name("vehicle.store");
 Route::get('/track', 'App\Http\Controllers\VehicleController@track')->name("vehicle.track");
-Route::get('/fuel', 'App\Http\Controllers\VehicleController@fuel')->name("vehicle.fuel");
+
+
+Route::get('/fuel', 'App\Http\Controllers\CarburantController@index')->name("vehicle.fuel");
 
 
 Route::get('/maintenance', 'App\Http\Controllers\MaintenanceController@index')->name("vehicle.maintenance");

@@ -15,17 +15,18 @@
         <section class="section dashboard">
             <div class="row">
                 <!-- Right side columns -->
-                <div class="col-lg-4">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">maintenance Details</h5>
 
                             <!-- Browser Default Validation -->
-                            <form action="" class="row g-3">
+                            <form action="{{ route('maintenance.search') }}" method="post" class="row g-3">
+                                @csrf
                                 <div class="col-md-4">
-                                    <label for="validationDefault01" class="form-label">First name</label>
-                                     <select name="driver_id" id="driver_id">
+                                    <label for="validationDefault01" class="form-label">First name</label><br>
+                                     <select name="driver_id" id="driver_id" class="form-select form-select-md mb-3" aria-label="Large select example">
                                             @foreach ($drivers as $driver)
                                                 <option value="{{ $driver->id }}">{{ $driver->first_name." ".$driver->second_name }}</option>
                                             @endforeach
@@ -57,7 +58,7 @@
                 </div><!-- End Right side columns -->
 
                 <!-- Left side columns -->
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="row">
 
 
@@ -84,36 +85,28 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">Données <span></span></h5>
-
-                                         <label for="name">Name</label>
-                                         <select name="maintenance_id" id="maintenance_id">
-                                            @foreach ($maintenances as $maintenance)
-                                                <option value="{{ $maintenance->id }}">{{ $maintenance->driver->second_name }}</option>
-                                            @endforeach
-                                         </select>
-
-                                            @if(isset($maintenance))
                                                 <table>
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Nom</th>
                                                             <th scope="col">Véhicule Imm</th>
-                                                            <th scope="col">Montant</th>
-                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Montant total</th>
+                                                
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            @foreach($results as $result)
                                                             <tr>
-                                                                <td>{{ $maintenance->driver->second_name }}</td>
-                                                                <td>{{ $maintenance->vehicle_id }}</td>
-                                                                <td>{{ $maintenance->montantM }}</td>
-                                                                <td>{{ $maintenance->date }}</td>
+                                                                <td>{{ $result->Nom_Prenoms }}</td>
+                                                                <td>{{ $result->Immatriculation }}</td>
+                                                                <td>{{ $result->Total}}</td>
+                                                                
                                                             </tr>
+                                                            @endforeach
                                                         </tbody>
 
-                                                        <td>Total :  </td>
+                                                        <td>Total :{{$totalM}} </td>
                                                     </table>
-                                                @endif
 
                                 </div>
 

@@ -22,25 +22,7 @@
                             <h5 class="card-title">Fuel Details</h5>
 
                             <!-- Browser Default Validation -->
-                            <form class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="validationDefault01" class="form-label">First name</label>
-                                    <input type="text" class="form-control" id="validationDefault01" value="John"
-                                        required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="validationDefault02" class="form-label">Début</label>
-                                    <input type="date" class="form-control" id="validationDefault02" value="Doe"
-                                        required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="validationDefaultUsername" class="form-label">Fin</label>
-                                    <div class="input-group">
-                                        
-                                        <input type="date" class="form-control" id="validationDefaultUsername"
-                                            aria-describedby="inputGroupPrepend2" required>
-                                    </div>
-                                </div>
+        
 
                                 <div class="col-12">
                                     <button class="btn btn-primary" type="submit">Submit form</button>
@@ -82,18 +64,19 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Données <span></span></h5>
 
-                                    <label for="name">Name</label>
-                                         <select name="carburant_id" id="carburant_id">
-                                            @foreach ($carburants as $carburant)
-                                                <option value="{{ $carburant->id }}">{{ $carburant->driver->second_name }}</option>
+                                    <div class="col-md-4">
+                                    <label for="validationDefault01" class="form-label">First name</label><br>
+                                     <select name="driver_id" id="driver_id" class="form-select form-select-md mb-3" aria-label="Large select example">
+                                            @foreach ($drivers as $driver)
+                                                <option value="{{ $driver->id }}">{{ $driver->first_name." ".$driver->second_name }}</option>
                                             @endforeach
                                          </select>
-
-                                         @if(isset($carburant))
+                                </div>
 
                                         <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
+                                                <th scope="col">#</th>
                                                 <th scope="col">Nom</th>
                                                 <th scope="col">Vehicule Imm</th>
                                                 <th scope="col">Quantité</th>
@@ -103,12 +86,14 @@
                                         <tbody>
                                             @foreach ($carburants as $carburant)
                                             <tr>
-                                                <td>{{$carburant->id}}</td>
-                                                <td>{{}}</td>
+                                                <td>{{$carburant->id}}</td>c
+                                                <td>{{$carburant->driver->first_name." ".driver->second_name}}</td>
+                                                <td>{{$carburant->vehicle->serial}}</td>
+                                                <td>{{$carburant->nblitre}}</td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
+                                               
                                             </tr>
+                                            @endforeach
                                     </tbody>
                                     </table>
 

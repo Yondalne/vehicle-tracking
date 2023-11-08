@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carburant;
+use App\Models\Driver;
+use App\Models\Vehicle;
 use Exception;
 
 class CarburantController extends Controller
@@ -13,7 +15,15 @@ class CarburantController extends Controller
      */
     public function index()
     {
-        //
+         
+        $carburants = Carburant::all(); // Charger tous les véhicules depuis la base de données
+        $drivers= Driver::all();
+        $vehicles= Vehicle::all();
+
+        return view('vehicle.fuel', ['carburants' => $carburants,
+            'drivers'=>$drivers,
+            'vehicles'=>$vehicles
+    ]);
     }
 
     /**
