@@ -93,17 +93,15 @@
                                             <th scope="col">Nom</th>
                                             <th scope="col">Véhicule Imm</th>
                                             <th scope="col">Montant total</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($results as $result)
-                                        <tr>
-                                            <td>{{ $result->Nom_Prenoms }}</td>
-                                            <td>{{ $result->Immatriculation }}</td>
-                                            <td>{{ $result->Total}}</td>
-
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $result->Nom_Prenoms }}</td>
+                                                <td>{{ $result->Immatriculation }}</td>
+                                                <td>{{ $result->Total}}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
 
