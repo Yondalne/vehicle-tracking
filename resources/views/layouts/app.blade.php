@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  
+
   <link href= "{{ asset('/img/favicon.png') }}"  rel="icon">
   <link href="{{ asset('/img/apple-touch-icon.png') }}"  rel="apple-touch-icon">
 
@@ -227,7 +227,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            
+
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -268,38 +268,38 @@
           <i class="bi bi-card-list"></i>
           <span>Drivers</span>
         </a>
-      </li><!-- End Tables Nav --> 
+      </li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('vehicle.attribution') }}">
           <i class="bi bi-card-list"></i>
           <span>Attribution</span>
         </a>
-      </li><!-- End Tables Nav -->   
+      </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('vehicle.track') }}">
+        <a class="nav-link collapsed" href="/map">
           <i class="bi bi-card-list"></i>
           <span>Track Vehicle</span>
         </a>
       </li><!-- End Register Page Nav -->
-      
+
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('vehicle.fuel') }}">
           <i class="bi bi-card-list"></i>
           <span>Fuel</span>
         </a>
-      </li><!-- End Tables Nav -->  
+      </li><!-- End Tables Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('vehicle.maintenance') }}">
           <i class="bi bi-card-list"></i>
           <span>Vehicule Maintenance</span>
         </a>
-      </li><!-- End Tables Nav -->         
-      
+      </li><!-- End Tables Nav -->
 
-      
-      
+
+
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -332,4 +332,3 @@
 </body>
 
 </html>
-  

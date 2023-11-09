@@ -22,7 +22,7 @@
                             <h5 class="card-title">Fuel Details</h5>
 
                             <!-- Browser Default Validation -->
-        
+
                             <form action="{{ route('fuel.search') }}" method="post" class="row g-3">
                                 @csrf
                                 <div class="col-md-4">
@@ -41,7 +41,7 @@
                                 <div class="col-md-4">
                                     <label for="validationDefaultUsername" class="form-label">Fin</label>
                                     <div class="input-group">
-                                        
+
                                         <input type="date" name="datefin" class="form-control" id="validationDefaultUsername" value="2050-01-01"
                                             aria-describedby="inputGroupPrepend2" required>
                                     </div>
@@ -96,16 +96,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($results as $result)
-                                            <tr>
-                                                <td>{{$result->id}}</td>c
-                                                <td>{{$result->Nom_Prenoms}}</td>
-                                                <td>{{$result->Immatriculation }}</td>
-                                                <td>{{$result->Total}}</td>
-                                                <td></td>
-                                               
-                                            </tr>
-                                            @endforeach
+                                            @forelse ($results as $result)
+                                                <tr>
+                                                    <td>{{$loop->index}}</td>
+                                                    <td>{{$result->Nom_Prenoms}}</td>
+                                                    <td>{{$result->Immatriculation }}</td>
+                                                    <td>{{$result->Total}}</td>
+                                                    <td></td>
+
+                                                </tr>
+                                            @empty
+                                                Aucun resultats
+                                            @endforelse
                                     </tbody>
                                     </table>
 

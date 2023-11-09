@@ -16,6 +16,9 @@ use App\Http\Controllers\Controller;
 |
 */
 
+Route::get('/', function() {
+    return redirect('/dashboard');
+});
 
 Route::get('/map', [Controller::class, 'maps']);
 
