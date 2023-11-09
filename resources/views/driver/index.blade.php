@@ -3,7 +3,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Tables</h1>
+        <h1>Chauffeurs</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -21,7 +21,7 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="pt-4 pb-2">
-                                <h5 class="card-title text-center pb-0 fs-4">Driver Registration</h5>
+                                <h5 class="card-title text-center pb-0 fs-4">Ajouter un chauffeur</h5>
                             </div>
                             <form action="{{ route('driver.store') }}" method="POST" class="row g-3 needs-validation"
                                 novalidate>
@@ -93,10 +93,10 @@
                     <div class="col-lg-12">
                         <div class="card recent-sales overflow-auto">
 
-                            
+
 
                             <div class="card-body">
-                                <h5 class="card-title">Datatables</h5>
+                                <h5 class="card-title">Chauffeurs</h5>
 
                                 <!-- Table with stripped rows -->
                                 <table class="table">

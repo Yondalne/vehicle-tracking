@@ -3,7 +3,7 @@
 <section class="section dashboard">
         <div class="row">
 
-            
+
             <div class="col-lg-">
                 <div class="row">
 
@@ -15,10 +15,10 @@
                     <div class="col-lg-12">
                         <div class="card recent-sales overflow-auto">
 
-                            
+
 
                             <div class="card-body">
-                                <h5 class="card-title">Datatables</h5>
+                                <h5 class="card-title">Chauffeurs</h5>
 
                                 <!-- Table with stripped rows -->
                                 <table class="table">

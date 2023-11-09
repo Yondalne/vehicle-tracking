@@ -52,22 +52,22 @@ class MaintenanceController extends Controller
             "datedebut" => "required",
             "datefin" => "required"
         ]);
-
+        // dd($request);
         $results = DB::table('maintenances')
-        ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
-        ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
-        ->where('drivers.id', $request->driver_id)
-        ->whereBetween('maintenances.date', [$request->datedebut, $request->datefin])
-        ->groupBy('vehicles.id', 'drivers.id')
-        ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
-        ->selectRaw('vehicles.serial as Immatriculation')
-        ->selectRaw('SUM(maintenances.montantM) as Total')
-        ->get();
+            ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
+            ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
+            ->where('drivers.id', (int) $request->driver_id)
+            ->whereBetween('maintenances.date', [$request->datedebut, $request->datefin])
+            ->groupBy('vehicles.id', 'drivers.id')
+            ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
+            ->selectRaw('vehicles.serial as Immatriculation')
+            ->selectRaw('SUM(maintenances.montantM) as Total')
+            ->get();
         $totalM = 0;
         foreach ($results as $result) {
             $totalM += $result->Total;
         }
-
+        // dd($results);
         return view('vehicle.maintenance', ['maintenances' => $maintenances,
             'drivers'=>$drivers,
             'vehicles'=>$vehicles,

@@ -3,7 +3,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Data Tables</h1>
+        <h1>Attributions de vehicule</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -26,7 +26,7 @@
                             <form action="{{ route('attribution.store') }}" method="post" class="row g-3 needs-validation"
                                 novalidate>
                                 @csrf
-                                
+
                                 <select class="form-select" aria-label="Default select example" name="vehicle_id">
                                 <option selected>Selectionnez un vehicle</option>
                                     @foreach ($vehicles as $vehicle)
@@ -62,10 +62,10 @@
                     <div class="col-lg-12">
                         <div class="card recent-sales overflow-auto">
 
-                            
+
 
                             <div class="card-body">
-                                <h5 class="card-title">Datatables</h5>
+                                <h5 class="card-title">Listes des attributions</h5>
 
                                 <!-- Table with stripped rows -->
                                 <table class="table">
@@ -75,7 +75,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Nom du chauffeur</th>
                                             <th scope="col">Immatriculation</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,10 +84,10 @@
                                        <td>{{$drive->id}}</td>
                                        <td>{{$drive->driver->first_name." ". $drive->driver->second_name}}</td>
                                        <td>{{$drive->vehicle->serial}}</td>
-                                       
+
                                        </tr>
                                        @endforeach
-                                       
+
                                     </tbody>
                                 </table>
 

@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 
 use App\Models\Driver;
+use Illuminate\Support\Facades\Hash;
 
 class DriverController extends Controller
 {
@@ -71,7 +72,7 @@ class DriverController extends Controller
         $address = $request->input('address');
         $salary = $request->input('salary');
         $email = $request->input('email');
-        $password = $request->input('password');
+        $password = Hash::make($request->input('password'));
         $birthday = $request->input('birthday');
         $phone = $request->input('phone');
 

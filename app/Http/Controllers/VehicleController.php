@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use App\Models\Driver;
+use App\Models\Maintenance;
+use App\Models\Carburant;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,9 +16,15 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $vehicles = Vehicle::all(); // Charger tous les véhicules depuis la base de données
+        $vehicles = Vehicle::all();
+        $carburants = Carburant::all()->count();
+        $drivers = Driver::all()->count();
+        $maintenances = Maintenance::all()->count();// Charger tous les véhicules depuis la base de données
 
-    return view('vehicle.index', ['vehicles' => $vehicles]);
+    return view('vehicle.index', ['vehicles' => $vehicles,
+                                    'drivers' => $drivers,
+                                    'maintenances' => $maintenances,
+                                    'carburants' => $carburants]);
     }
 
     /**
@@ -39,7 +48,7 @@ class VehicleController extends Controller
             "production_year" => "required",
             "is_attributed" => "required"
         ]);
-        
+
         // Créez une nouvelle instance de Vehicle et remplissez les données demandées dans les colonnes correspondantes
         $vehicle = new Vehicle;
         $vehicle->serial = $request->input('serial');
