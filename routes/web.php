@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\VehicleController;
@@ -22,29 +23,37 @@ Route::get('/', function() {
 
 Route::get('/map', [Controller::class, 'maps']);
 
-// ---------DRIVER------------
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/profil', 'App\Http\Controllers\DriverController@profil')->name("driver.profil");
-Route::get('/drivers', 'App\Http\Controllers\DriverController@index')->name("driver.index");
-Route::get('/signout', 'App\Http\Controllers\DriverController@signout')->name("driver.signout");
-Route::post('/store', 'App\Http\Controllers\DriverController@store')->name("driver.store");
+Route::group(["middleware" => 'auth'], function() {
+    // ---------DRIVER------------
 
-// ---------VEHICULE----------
-Route::get('/dashboard', 'App\Http\Controllers\VehicleController@index')->name("vehicle.index");
-Route::post('/store/vehicle', 'App\Http\Controllers\VehicleController@store')->name("vehicle.store");
-Route::get('/track', 'App\Http\Controllers\VehicleController@track')->name("vehicle.track");
+    Route::get('/profil', 'App\Http\Controllers\DriverController@profil')->name("driver.profil");
+    Route::get('/drivers', 'App\Http\Controllers\DriverController@index')->name("driver.index");
+    Route::post('/store', 'App\Http\Controllers\DriverController@store')->name("driver.store");
 
-
-Route::get('/fuel', 'App\Http\Controllers\CarburantController@index')->name("vehicle.fuel");
-Route::post('/fuel/search', 'App\Http\Controllers\CarburantController@search')->name("fuel.search");
-
-
-Route::get('/maintenance', 'App\Http\Controllers\MaintenanceController@index')->name("vehicle.maintenance");
-Route::post('/maintenance/search', 'App\Http\Controllers\MaintenanceController@search')->name("maintenance.search");
+    // ---------VEHICULE----------
+    Route::get('/dashboard', 'App\Http\Controllers\VehicleController@index')->name("vehicle.index");
+    Route::post('/store/vehicle', 'App\Http\Controllers\VehicleController@store')->name("vehicle.store");
+    Route::get('/track', 'App\Http\Controllers\VehicleController@track')->name("vehicle.track");
 
 
-Route::get('/attribution', 'App\Http\Controllers\DriveController@index')->name("vehicle.attribution");
-Route::post('/store/attribution', 'App\Http\Controllers\DriveController@store')->name("attribution.store");
+    Route::get('/fuel', 'App\Http\Controllers\CarburantController@index')->name("vehicle.fuel");
+    Route::post('/fuel/search', 'App\Http\Controllers\CarburantController@search')->name("fuel.search");
+
+
+    Route::get('/maintenance', 'App\Http\Controllers\MaintenanceController@index')->name("vehicle.maintenance");
+    Route::post('/maintenance/search', 'App\Http\Controllers\MaintenanceController@search')->name("maintenance.search");
+
+
+    Route::get('/attribution', 'App\Http\Controllers\DriveController@index')->name("vehicle.attribution");
+    Route::post('/store/attribution', 'App\Http\Controllers\DriveController@store')->name("attribution.store");
+
+    Route::get("/logout", [AuthController::class, 'logoutAdmin'])->name("signout");
+});
 
 
 

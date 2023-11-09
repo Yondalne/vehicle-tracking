@@ -73,7 +73,7 @@ class CarburantController extends Controller
             $totalM += $result->Total;
         }
 
-        return view('vehicle.maintenance', [
+        return view('vehicle.fuel', [
             'carburants' => $carburants,
             'drivers' => $drivers,
             'vehicles' => $vehicles,

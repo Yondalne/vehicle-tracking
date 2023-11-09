@@ -15,7 +15,7 @@ class DriverController extends Controller
      */
     public function index()
     {
-      
+
         $drivers = Driver::all(); // Charger tous les véhicules depuis la base de données
 
         return view('driver.index', ['drivers' => $drivers]);
@@ -35,12 +35,6 @@ class DriverController extends Controller
         $viewData = [];
         $viewData["title"] = "Home Page - Online Store";
         return view('driver.profil')->with("viewData", $viewData);
-    }
-
-    public function signout(){
-        $viewData = [];
-        $viewData["title"] = "Home Page - Online Store";
-        return view('driver.signout')->with("viewData", $viewData);
     }
 
     public function sign(){
@@ -95,13 +89,13 @@ class DriverController extends Controller
         // Save the data
         $driver->save();
 
-        
+
 
         return redirect()->route('driver.index');
     }
 
 
-    
+
     /**
      * Display the specified resource.
      */
@@ -136,7 +130,7 @@ class DriverController extends Controller
         $birthday = $request->input('birthday');
         $phone = $request->input('phone');
 
-        
+
         $driver = Driver::all()->find($id);
 
         $driver->second_name = $second_name;
@@ -149,7 +143,7 @@ class DriverController extends Controller
         $driver->birthday = $birthday;
         $driver->phone = $phone;
 
-      
+
 
         // Save the data
         $driver->save();

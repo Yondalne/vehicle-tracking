@@ -106,7 +106,6 @@
 
                                                 </tr>
                                             @empty
-                                                Aucun resultats
                                             @endforelse
                                     </tbody>
                                     </table>

@@ -80,4 +80,25 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Inscription réussie'], 200);
     }
+
+    public function login(Request $request) {
+        $request->validate([
+            "email" => "required",
+            "password" => "required",
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return redirect("/dashboard");
+        }
+
+        return back()->withErrors([
+            'email' => "Les informations de connexions sont incorrectes",
+        ]);
+    }
+
+    public function logoutAdmin() {
+        Auth::logout();
+        return redirect('/login');
+    }
 }

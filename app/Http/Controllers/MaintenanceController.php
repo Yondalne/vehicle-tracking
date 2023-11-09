@@ -19,7 +19,7 @@ class MaintenanceController extends Controller
         $maintenances = Maintenance::all(); // Charger tous les véhicules depuis la base de données
         $drivers= Driver::all();
         $vehicles= Vehicle::all();
-    
+
         $results = DB::table('maintenances')
         ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
         ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
@@ -31,10 +31,10 @@ class MaintenanceController extends Controller
         foreach ($results as $result) {
             $totalM += $result->Total;
         }
-            
+
         return view('vehicle.maintenance', ['maintenances' => $maintenances,
             'drivers'=>$drivers,
-            'vehicles'=>$vehicles, 
+            'vehicles'=>$vehicles,
             'results'=>$results,
             'totalM' => $totalM
 
@@ -57,7 +57,7 @@ class MaintenanceController extends Controller
         ->join('vehicles', 'maintenances.vehicle_id', '=', 'vehicles.id')
         ->join('drivers', 'maintenances.driver_id', '=', 'drivers.id')
         ->where('drivers.id', $request->driver_id)
-        ->whereBetween('maintenances.c', [$request->datedebut, $request->datefin])
+        ->whereBetween('maintenances.date', [$request->datedebut, $request->datefin])
         ->groupBy('vehicles.id', 'drivers.id')
         ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
         ->selectRaw('vehicles.serial as Immatriculation')
@@ -70,7 +70,7 @@ class MaintenanceController extends Controller
 
         return view('vehicle.maintenance', ['maintenances' => $maintenances,
             'drivers'=>$drivers,
-            'vehicles'=>$vehicles, 
+            'vehicles'=>$vehicles,
             'results'=>$results,
             'totalM' => $totalM
 
@@ -82,7 +82,7 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        
+
 
     }
 
