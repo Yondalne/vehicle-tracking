@@ -44,7 +44,7 @@ class CarburantController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function search()
+    public function search(Request $request)
     {
         $carburants = Carburant::all();
         $drivers = Driver::all();
@@ -62,7 +62,7 @@ class CarburantController extends Controller
             ->where('drivers.id', $request->driver_id)
             ->whereBetween('carburants.date', [$request->datedebut, $request->datefin])
             ->groupBy('vehicles.id', 'drivers.id', )
-           
+
             ->selectRaw('CONCAT(drivers.first_name, " ", drivers.second_name) as Nom_Prenoms')
             ->selectRaw('vehicles.serial as Immatriculation')
             ->selectRaw('SUM(carburants.montant) as Total')
@@ -82,7 +82,7 @@ class CarburantController extends Controller
         ]);
     }
 
-    
+
 
 
     /**
