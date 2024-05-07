@@ -32,11 +32,11 @@ class AuthController extends Controller
                 'status' => 200,
             ], 200);
         }
-
         return response()->json([
             'error' => 'Unauthorized',
             'status' => 401,
         ], 401);
+
     }
 
 
